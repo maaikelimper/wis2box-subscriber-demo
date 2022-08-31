@@ -1,0 +1,5 @@
+services:
+  wis2box-subscriber:
+    container_name: wis2box-subscriber
+    build:
+      context: .
