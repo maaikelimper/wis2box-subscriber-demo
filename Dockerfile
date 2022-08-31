@@ -24,7 +24,7 @@ FROM python:3-alpine
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 	
-RUN pip install --no-cache-dir boto3 paho-mqtt
+RUN pip install --no-cache-dir boto3 paho-mqtt requests
 
 COPY *.py /usr/src/app/
 	
