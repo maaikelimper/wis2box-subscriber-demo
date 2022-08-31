@@ -1,5 +1,9 @@
 services:
   wis2box-subscriber:
     container_name: wis2box-subscriber
+    environment:
+      MQTT_HOST: ${MQTT_HOST}
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PWD: ${MQTT_PWD}
     build:
       context: .
