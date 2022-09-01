@@ -21,6 +21,7 @@ def sub_on_message(client, userdata, msg):
 MQTT_USERNAME = os.getenv("MQTT_USERNAME")
 MQTT_PWD = os.getenv("MQTT_PWD")
 MQTT_HOST = os.getenv("MQTT_HOST")
+MQTT_PORT = os.getenv("MQTT_PORT",8883)
 LOG_LEVEL = os.getenv("LOG_LEVEL","DEBUG")
 logging.basicConfig(level=LOG_LEVEL)
 logging.getLogger("mqtt").setLevel(logging.INFO)
@@ -33,7 +34,7 @@ def run_wis2box_subscriber():
     client.username_pw_set(MQTT_USERNAME, MQTT_PWD)
     client.on_connect = sub_connect
     client.on_message = sub_on_message
-    client.connect(MQTT_HOST)
+    client.connect(MQTT_HOST,port=int(MQTT_PORT))
     client.loop_forever()
 
 def main():
@@ -41,6 +42,7 @@ def main():
     logging.info(f'MQTT_HOST={MQTT_HOST}')
     logging.info(f'MQTT_USERNAME={MQTT_USERNAME}')
     logging.info(f'MQTT_PASSWORD={MQTT_PWD}')
+    logging.info(f'MQTT_PORT={MQTT_PORT}')
     run_wis2box_subscriber()
 
 if __name__ == "__main__":
