@@ -27,7 +27,9 @@ WORKDIR /usr/src/app
 RUN pip install --no-cache-dir boto3 paho-mqtt requests jsonschema
 
 COPY *.py /usr/src/app/
-	
+
+COPY data_mapping.csv /tmp/data_mapping.csv
+
 ENV PYTHONUNBUFFERED="true"
 	
 CMD [ "python3", "-u", "wis2box-subscriber.py" ]

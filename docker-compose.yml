@@ -5,5 +5,11 @@ services:
       MQTT_HOST: ${MQTT_HOST}
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PWD: ${MQTT_PWD}
+      LOG_LEVEL: ${LOG_LEVEL}
+      STORAGE_HOST_URL: ${STORAGE_HOST_URL}
+      STORAGE_USERNAME: ${STORAGE_USERNAME}
+      STORAGE_PWD: ${STORAGE_PWD}
     build:
       context: .
+    volumes:
+      - ./data_mapping.csv:/tmp/data_mapping.csv
