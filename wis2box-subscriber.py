@@ -21,6 +21,8 @@ STORAGE_HOST_URL = os.getenv("STORAGE_HOST_URL")
 
 DATA_MAPPING = {}
 
+TOPICS = []
+
 LOG_LEVEL = os.getenv("LOG_LEVEL", "WARNING")
 LOGGER = logging.getLogger('wis2box-subscriber')
 LOGGER.setLevel(LOG_LEVEL)
@@ -32,14 +34,16 @@ def sub_connect(client, userdata, flags, rc, properties=None):
         LOGGER.info(f'subscribing to topic: {topic}')
         client.subscribe(topic, qos=1)
 
-
 def sub_on_message(client, userdata, msg):
     """
       do something with the message
     """
-    LOGGER.info(f"topic={msg.topic}")
+    if msg.topic not in TOPICS:
+        LOGGER.info(f"new_topic,{msg.topic}")
+        TOPICS.add(msg.topic)
+    return
 
-    # use regex to match msg.topic with subscribed-topic and get S3-folder
+    # use regex to match msg.topic with subscribed-topic and get S3-folder  
     folder = ''
     for topic in DATA_MAPPING:
         pattern = topic.replace('+', '[^/]*').replace('/#', '(|/.*)')
@@ -114,9 +118,9 @@ def main():
     if not STORAGE_HOST_URL:
         LOGGER.error('STORAGE_HOST_URL is not defined')
         return
-    
-    print("send following topics to wis2box: ")
-    with open('/tmp/data_mapping.csv') as file:
+    data_mapping_file = '/tmp/data_mapping.csv'
+    print(f"Read configuration from {data_mapping_file}: ")
+    with open(data_mapping_file) as file:
         reader = csv.reader(file)
         next(reader, None)
         for data in reader:
@@ -129,7 +133,7 @@ def main():
             DATA_MAPPING[topic] = {}
             DATA_MAPPING[topic]['folder'] = incoming_folder
     if len(DATA_MAPPING.keys()) > 0:
-        print(f'Found {len(DATA_MAPPING.keys())} topics to subscribe to')
+        print(f'Configuration provided {len(DATA_MAPPING.keys())} mqtt-topics')
         run_wis2box_subscriber()
     else:
         print('0 topics defined, exiting')
