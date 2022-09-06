@@ -1,4 +1,4 @@
 mqtt_topic,storage_folder
 cache/v04/wis2/ita/roma_met_com_centre/data/core/weather/surface-based-obs/synop/land/#,/ita/roma_met_centre/data/core/weather/surface-based-observations/SYNOP
-cache/v04/wis2/dza/alger_centre_regional_des_telecommunications_meteorologiques/data/core/weather/surface-based-obs/synop/land/#,/arg/buenos_aires_met_centre/data/core/weather/surface-based-observations/SYNOP
+cache/v04/wis2/dza/alger_centre_regional_des_telecommunications_meteorologiques/data/core/weather/surface-based-obs/synop/land/#,/arg/ba_met_centre/data/core/weather/surface-based-observations/SYNOP
 cache/v04/wis2/eue/ecmwf/data/core/weather/global-analysis-prediction/forecast/#,/eue/ecmwf/data/core/weather/analysis-prediction/forecast
