@@ -21,7 +21,7 @@ STORAGE_HOST_URL = os.getenv("STORAGE_HOST_URL")
 
 DATA_MAPPING = {}
 
-TOPICS = []
+#TOPICS = []
 
 LOG_LEVEL = os.getenv("LOG_LEVEL", "WARNING")
 LOGGER = logging.getLogger('wis2box-subscriber')
@@ -38,10 +38,10 @@ def sub_on_message(client, userdata, msg):
     """
       do something with the message
     """
-    if msg.topic not in TOPICS:
-        LOGGER.info(f"new_topic,{msg.topic}")
-        TOPICS.append(msg.topic)
-    return
+    #if msg.topic not in TOPICS:
+    #    LOGGER.info(f"new_topic,{msg.topic}")
+    #    TOPICS.append(msg.topic)
+    #return
 
     # use regex to match msg.topic with subscribed-topic and get S3-folder  
     folder = ''
