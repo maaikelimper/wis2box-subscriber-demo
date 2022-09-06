@@ -40,7 +40,7 @@ def sub_on_message(client, userdata, msg):
     """
     if msg.topic not in TOPICS:
         LOGGER.info(f"new_topic,{msg.topic}")
-        TOPICS.add(msg.topic)
+        TOPICS.append(msg.topic)
     return
 
     # use regex to match msg.topic with subscribed-topic and get S3-folder  
